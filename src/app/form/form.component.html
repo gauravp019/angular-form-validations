@@ -1,0 +1,44 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>Name:
+            <input formControlName="firstName" type="text" class="form-control" placeholder="Enter Name" required
+                minlength="4">
+
+            <span class="text-danger"
+                *ngIf=" registerForm.get('firstName').errors && (registerForm.get('firstName').touched || registerForm.get('firstName').dirty  ) ">
+                <span *ngIf="registerForm.get('firstName').errors.required">
+                    please enter the value
+                </span>
+                <span *ngIf="registerForm.get('firstName').errors.minlength">
+                    please enter atleast 4 words
+                </span>
+
+            </span>
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Email address:
+            <input formControlName="email" type="email" class="form-control" placeholder="Enter email">
+            <span class="text-danger"
+                *ngIf=" (registerForm.get('email').touched || registerForm.get('email').dirty  ) && registerForm.get('email').errors">
+                <span *ngIf="registerForm.get('email').errors.required">
+                    Email is required
+                </span>
+                <span *ngIf="registerForm.get('email').errors.email">
+                    Must be a valid Email
+                </span>
+            </span>
+        </label>
+
+    </div>
+    <div class="form-group">
+        <label>Password:
+            <input formControlName="password" type="password" class="form-control" placeholder="Password">
+        </label>
+    </div>
+
+    <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+</form>
+<p>
+    Form Status: {{ registerForm.status }}
+</p>
